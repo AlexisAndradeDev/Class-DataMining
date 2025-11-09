@@ -1,3 +1,5 @@
+*Some formulas are not displayed correctly in GitHub's native .md visualization. It's recommended to open this .md in VSC or some other editor that displays the math correctly.*
+
 # P7: Data Clustering
 
 Create a model using K means and test it.
