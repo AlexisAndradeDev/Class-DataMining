@@ -25,13 +25,13 @@ The K-means clustering procedure results from a simple and intuitive mathematica
 
 Let $C_1, ..., C_K$ denote sets containing the indices of the observations in each cluster. These sets satisfy two properties:
 
-1. $C_1 \cup C_2 \cup ... \cup C_K = {1, ..., n}$. In other words, each observation belongs to at least one of the $K$ clusters.
+1. $C_1 \cup C_2 \cup \dots \cup C_K = {1, ..., n}$. In other words, each observation belongs to at least one of the $K$ clusters.
 
     > The cluster $C_k$ contains a set of data points (note $k$ is not the same as $K$; $k$ is the "index" of the cluster). The union of all the clusters contains the entire set of data points in the dataset.
 
 2. $C_k \cap C_{k'} = \varnothing \quad \forall k \neq k'$. In other words, the clusters are non-overlapping: no observation belongs to more than one cluster.
 
-If the $i$th observation is in the $k$th cluster, then $i \in C_k$. The idea behind K-means clustering is that a good clustering is one for which the *within-cluster variation* is as small as possible. The within-cluster variation for cluster $C_k$ is a measure $W(C_k)$ of the amount by which the observations within a cluster differ from each other. Hence we want to solve the problem:
+If the $i$ th observation is in the $k$ th cluster, then $i \in C_k$. The idea behind K-means clustering is that a good clustering is one for which the *within-cluster variation* is as small as possible. The within-cluster variation for cluster $C_k$ is a measure $W(C_k)$ of the amount by which the observations within a cluster differ from each other. Hence we want to solve the problem:
 
 $\min\limits_{C_1, \dots, C_K}{\{\sum\limits^{K}_{k=1}{W(C_k)}\}} \qquad (12.15)$
 
@@ -41,9 +41,9 @@ Solving (12.15) seems like a reasonable idea, but in order to make it actionable
 
 $W(C_k) = \frac{1}{|C_k|} \sum\limits_{i, i' \in C_k}{\sum\limits^{p}_{j=1}{(x_{ij} - x_{i'j})^2}}, \qquad (12.16)$
 
-Where $|C_k|$ denotes the number of observations in the $k$th cluster. The within-cluster variation for the $k$th cluster is the sum of all of the pairwise squared Euclidean distances between the observations in the $k$th cluster, divided by the total number of observations in the $k$th cluster. Combining (12.15) and (12.6) gives the optimization problem that defines:
+Where $|C_k|$ denotes the number of observations in the $k$ th cluster. The within-cluster variation for the $k$ th cluster is the sum of all of the pairwise squared Euclidean distances between the observations in the $k$ th cluster, divided by the total number of observations in the $k$ th cluster. Combining (12.15) and (12.6) gives the optimization problem that defines:
 
-$\min\limits_{C_1, \dots, C_K}{\{ \sum\limits^{K}_{k=1}{(\frac{1}{|C_k|} \sum\limits_{i, i' \in C_k}{\sum\limits^{p}_{j=1}{(x_{ij} - x_{i'j})^2}})} \}}. \qquad (12.17)$
+$\min\limits_{C_1, \dots, C_K}{\{ \sum\limits^{K}_{k=1}{(\frac{1}{|C_k|} \sum\limits_{i, i' \in C_k}{\sum\limits^{p}_{j=1}{(x_{ij} - x_{i'j})^2}})} \}} \qquad (12.17)$
 
 Now, we would like to find an algorithm to solve (12.17), that is, a method to partition the observations into $K$ clusters such that the objective of (12.17) is minimized. This is in fact a very difficult problem to solve precisely, since there are almost $K^n$ ways to partition $n$ observations into $K$ clusters. This is a huge number unless $K$ and $n$ are tiny. Fortunately, a very simple algorithm can be shown to provide a local optimum, a pretty good solution, to the $K$ means optimization problem. This approach is laid out in [Algorithm 12.2](#k-means-algorithm-122).
 
@@ -55,9 +55,9 @@ Now, we would like to find an algorithm to solve (12.17), that is, a method to p
 
 2. Iterate until the cluster assignments stop changing:
     
-    (a) For each of the $K$ clusters, compute the cluster centroid. The $k$th cluster centroid is the vector of the $p$ feature means for the observations in the $k$th cluster.
+    (a) For each of the $K$ clusters, compute the cluster centroid. The $k$ th cluster centroid is the vector of the $p$ feature means for the observations in the $k$ th cluster.
 
-    For the $k$th cluster, take all the observations assigned to it. Every observation is a vector with $p$ features (e.g., height, age, etc.). You calculate the mean of each feature separately, but only for the observations in the $k$th cluster. This way, you get a new vector with $p$ features: each element of the vector is the mean of a feature in the $k$th cluster. This vector is the centroid of the cluster.
+    For the $k$ th cluster, take all the observations assigned to it. Every observation is a vector with $p$ features (e.g., height, age, etc.). You calculate the mean of each feature separately, but only for the observations in the $k$ th cluster. This way, you get a new vector with $p$ features: each element of the vector is the mean of a feature in the $k$ th cluster. This vector is the centroid of the cluster.
 
     (b) Assign each observation to the cluster whose centroid is closest (where *closest* is defined using Euclidean distance).
 
