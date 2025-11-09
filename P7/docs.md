@@ -39,7 +39,7 @@ This formula says that we want to partition the observations into $K$ clusters s
 
 Solving (12.15) seems like a reasonable idea, but in order to make it actionable we need to define the within-cluster variation. There are many possible ways to define this concept, but by far the most common choice involves squared Euclidean distance.
 
-$W(C_k) = \frac{1}{|C_k|} \sum\limits_{i, i' \in C_k}{\sum\limits^{p}_{j=1}{(x_{ij} - x_{i'j})^2}}, \qquad (12.16)$
+$W(C_k) = \frac{1}{|C_k|} \sum\limits_{i, i' \in C_k}{\sum\limits^{p}_{j=1}{(x_{ij} - x_{i'j})^2}} \qquad (12.16)$
 
 Where $|C_k|$ denotes the number of observations in the $k$ th cluster. The within-cluster variation for the $k$ th cluster is the sum of all of the pairwise squared Euclidean distances between the observations in the $k$ th cluster, divided by the total number of observations in the $k$ th cluster. Combining (12.15) and (12.6) gives the optimization problem that defines:
 
@@ -63,7 +63,7 @@ Now, we would like to find an algorithm to solve (12.17), that is, a method to p
 
 This algorithm is guaranteed to decrease the value of the objective at each step. To understand why, the following identity is illuminating:
 
-$\frac{1}{|C_k|} \sum\limits_{i,i' \in C_k} \sum\limits^{p}_{j=1}{(x_{ij} - \bar x_{i'j})^2} = 2 \sum\limits_{i \in C_k} \sum\limits^{p}_{j=1}{(x_{ij} - \bar x_{kj})^2}, \qquad (12.18)$
+$\frac{1}{|C_k|} \sum\limits_{i,i' \in C_k} \sum\limits^{p}_{j=1}{(x_{ij} - \bar x_{i'j})^2} = 2 \sum\limits_{i \in C_k} \sum\limits^{p}_{j=1}{(x_{ij} - \bar x_{kj})^2} \qquad (12.18)$
 
 where $\bar x_{kj} = \frac{1}{|C_k|} \sum\limits_{i \in C_k}{x_{ij}}$ is the mean for feature $j$ in cluster $C_k$. In step 2.a, the cluster means for each feature are the constants that minimize the sum-of-squared deviations, and in step 2.b, reallocating the observations can only improve (12.18). This means that as the algorithm is run, the clustering obtained will continually improve until the result no longer changes; the objective of (12.17) will never increase. When the result no longer changes, a *local optimum* has been reached. K-means clustering derives its name from the fact that in step 2.a, the cluster centroids are computed as the mean of the observations assigned to each cluster.
 
